@@ -55,4 +55,30 @@ public class AABB {
     public String toString() {
         return p1.toString() + " " + p2.toString();
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final AABB other = (AABB) obj;
+        if (this.p1 != other.p1 && (this.p1 == null || !this.p1.equals(other.p1))) {
+            return false;
+        }
+        if (this.p2 != other.p2 && (this.p2 == null || !this.p2.equals(other.p2))) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 71 * hash + (this.p1 != null ? this.p1.hashCode() : 0);
+        hash = 71 * hash + (this.p2 != null ? this.p2.hashCode() : 0);
+        return hash;
+    }
 }

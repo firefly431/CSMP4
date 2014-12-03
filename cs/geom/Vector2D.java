@@ -65,4 +65,30 @@ public class Vector2D {
     public String toString() {
         return String.format("(%d, %d)", x, y);
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Vector2D other = (Vector2D) obj;
+        if (this.x != other.x) {
+            return false;
+        }
+        if (this.y != other.y) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 47 * hash + this.x;
+        hash = 47 * hash + this.y;
+        return hash;
+    }
 }
