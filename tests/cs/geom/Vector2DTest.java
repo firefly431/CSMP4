@@ -6,12 +6,12 @@
 package tests.cs.geom;
 
 import cs.geom.Vector2D;
+import junit.framework.Assert;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import static org.junit.Assert.*;
 
 /**
  *
@@ -48,8 +48,7 @@ public class Vector2DTest {
         int y = 0;
         Vector2D instance = new Vector2D();
         instance.set(x, y);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        Assert.assertEquals(instance, new Vector2D(x, y));
     }
 
     /**
