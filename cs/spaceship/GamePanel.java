@@ -7,6 +7,7 @@
 
 package cs.spaceship;
 
+import cs.spaceship.entity.Spaceship;
 import java.awt.*;
 import java.awt.event.*;
 

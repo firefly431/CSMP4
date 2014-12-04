@@ -17,8 +17,23 @@ public class AABB {
              new Vector2D(x2, y2));
     }
 
+    public AABB(AABB other) {
+        this(other.p1, other.p2);
+    }
+
     public AABB(Vector2D p1, Vector2D p2) {
         set(p1, p2);
+    }
+
+    public AABB(int width, int height) {
+        this(0, 0, width, height);
+    }
+
+    public boolean intersects(AABB other) {
+        return (
+            p1.x <= other.p2.x && other.p1.x <= p2.x &&
+            p1.y <= other.p2.y && other.p1.y <= p2.y
+        );
     }
 
     public void set(Vector2D p1, Vector2D p2) {
@@ -40,11 +55,11 @@ public class AABB {
     }
 
     public Vector2D getTopLeft() {
-        return p1;
+        return new Vector2D(p1);
     }
 
     public Vector2D getBottomRight() {
-        return p2;
+        return new Vector2D(p2);
     }
 
     public Vector2D getCenter() {
@@ -80,5 +95,9 @@ public class AABB {
         hash = 71 * hash + (this.p1 != null ? this.p1.hashCode() : 0);
         hash = 71 * hash + (this.p2 != null ? this.p2.hashCode() : 0);
         return hash;
+    }
+
+    public Vector2D getSize() {
+        return p2.minus(p1);
     }
 }

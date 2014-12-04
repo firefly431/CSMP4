@@ -16,6 +16,11 @@ public class Vector2D {
         set(x, y);
     }
 
+    public Vector2D(Vector2D other) {
+        // copy constructor
+        this(other.x, other.y);
+    }
+
     public Vector2D() {
         this(0, 0);
     }
