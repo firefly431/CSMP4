@@ -10,7 +10,7 @@ import cs.geom.Vector2D;
 import cs.spaceship.Animation;
 import cs.spaceship.Controller;
 import cs.spaceship.GameFrame;
-import java.awt.Color;
+import cs.spaceship.GamePanel;
 
 import java.awt.Graphics;
 import java.awt.Image;
@@ -51,6 +51,12 @@ public class Spaceship extends Entity {
             dy -= VERTICAL_SPEED;
         if (isPressed(Controller.Key.DOWN))
             dy += VERTICAL_SPEED;
+        if (isPressed(Controller.Key.FIRE)) {
+            Bullet b = new Bullet();
+            b.setPosition(position.x, position.y - 20);
+            b.setVelocity(0, -1);
+            ((GamePanel)GameFrame.get().getCurrentPanel()).bullets.add(b);
+        }
         position.add(dx, dy);
         AABB aabb = getAABB();
         // collide with edges
