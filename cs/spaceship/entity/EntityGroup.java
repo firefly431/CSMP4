@@ -8,6 +8,7 @@ package cs.spaceship.entity;
 import cs.geom.AABB;
 import java.awt.Graphics;
 import java.util.HashSet;
+import java.util.Iterator;
 
 /**
  *
@@ -57,14 +58,22 @@ public class EntityGroup<E extends Entity> extends Entity {
 
     @Override
     public void update() {
-        for (E e : entities)
-            e.update();
+        for (Iterator<E> it = entities.iterator(); it.hasNext();) {
+            E e = it.next();
+            if (!e.shouldDelete())
+                e.update();
+            else
+                it.remove();
+        }
     }
 
     @Override
     public void draw(Graphics g) {
-        for (E e : entities)
-            e.draw(g);
+        for (Iterator<E> it = entities.iterator(); it.hasNext();) {
+            E e = it.next();
+            if (!e.shouldDelete())
+                e.draw(g);
+        }
     }
 
     public void add(E e) {
