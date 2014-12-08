@@ -26,7 +26,7 @@ public class GamePanel extends ControllableStatePanel implements ActionListener 
         player = new Spaceship();
         player.setController(getController());
         // center player on screen
-        player.position.set(GameFrame.WINDOW_WIDTH / 2, GameFrame.WINDOW_HEIGHT / 2);
+        //
         stepTimer = new Timer(30, this);
         stepTimer.start();
     }

@@ -1,0 +1,4 @@
+TODO: make Spaceship an entity
+TODO: entity/collision groups
+TODO: bullets
+TODO: enemies

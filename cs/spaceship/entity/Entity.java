@@ -11,21 +11,28 @@ import java.awt.Color;
 import java.awt.Graphics;
 
 public abstract class Entity {
-    public static final int COLLISION_WIDTH = 0;
-    public static final int COLLISION_HEIGHT = 0;
-
+    public static int COLLISION_WIDTH() {
+        return 0;
+    }
+    public static int COLLISION_HEIGHT() {
+        return 0;
+    }
     protected Vector2D position;
 
     private Controller controller;
 
     public AABB getAABB() {
-        AABB aabb = new AABB(COLLISION_WIDTH, COLLISION_HEIGHT);
+        AABB aabb = new AABB(COLLISION_WIDTH(), COLLISION_HEIGHT());
         aabb.center(position);
         return aabb;
     }
 
     public Vector2D getPosition() {
         return new Vector2D(position);
+    }
+
+    public void setPosition(Vector2D position) {
+        this.position = new Vector2D(position);
     }
 
     public Controller getController() {
