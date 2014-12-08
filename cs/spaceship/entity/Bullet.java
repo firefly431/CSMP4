@@ -43,6 +43,10 @@ public class Bullet extends Entity {
         this.posy = py;
     }
 
+    public void setColor(Color color) {
+        this.color = color;
+    }
+
     @Override
     public void update() {
         posx += velx;
