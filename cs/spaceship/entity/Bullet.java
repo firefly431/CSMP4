@@ -38,6 +38,11 @@ public class Bullet extends Entity {
         this.vely = y;
     }
 
+    public void setPosition(double px, double py) {
+        this.posx = px;
+        this.posy = py;
+    }
+
     @Override
     public void update() {
         posx += velx;
@@ -58,10 +63,12 @@ public class Bullet extends Entity {
         return !(new AABB(GameFrame.WINDOW_WIDTH, GameFrame.WINDOW_HEIGHT).intersects(getAABB()));
     }
 
+    @Override
     public int COLLISION_WIDTH() {
         return radius * 2;
     }
 
+    @Override
     public int COLLISION_HEIGHT() {
         return radius * 2;
     }
