@@ -25,10 +25,12 @@ public class Spaceship extends Entity {
 
     public static final int HORIZONTAL_SPEED = 6;
     public static final int VERTICAL_SPEED = 4;
-    public static int COLLISION_WIDTH() {
+    @Override
+    public int COLLISION_WIDTH() {
         return 26;
     }
-    public static int COLLISION_HEIGHT() {
+    @Override
+    public int COLLISION_HEIGHT() {
         return 86;
     }
 

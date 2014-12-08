@@ -11,10 +11,10 @@ import java.awt.Color;
 import java.awt.Graphics;
 
 public abstract class Entity {
-    public static int COLLISION_WIDTH() {
+    public int COLLISION_WIDTH() {
         return 0;
     }
-    public static int COLLISION_HEIGHT() {
+    public int COLLISION_HEIGHT() {
         return 0;
     }
 
@@ -77,5 +77,9 @@ public abstract class Entity {
         Color c = new Color(this.getClass().hashCode());
         g.setColor(c);
         g.fillRect(getAABB().getTopLeft().x, getAABB().getTopLeft().y, getAABB().getSize().x, getAABB().getSize().y);
+    }
+
+    public boolean shouldDelete() {
+        return false;
     }
 }
