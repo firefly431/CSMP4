@@ -55,6 +55,7 @@ public class Spaceship extends Entity {
             Bullet b = new Bullet();
             b.setPosition(position.x, position.y - 20);
             b.setVelocity(0, -1);
+            b.setRadius(5);
             ((GamePanel)GameFrame.get().getCurrentPanel()).bullets.add(b);
         }
         position.add(dx, dy);
