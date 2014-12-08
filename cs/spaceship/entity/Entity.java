@@ -17,9 +17,14 @@ public abstract class Entity {
     public static int COLLISION_HEIGHT() {
         return 0;
     }
+
     protected Vector2D position;
 
     private Controller controller;
+
+    public Entity() {
+        position = new Vector2D();
+    }
 
     public AABB getAABB() {
         AABB aabb = new AABB(COLLISION_WIDTH(), COLLISION_HEIGHT());
