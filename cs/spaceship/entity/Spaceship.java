@@ -11,6 +11,7 @@ import cs.spaceship.Animation;
 import cs.spaceship.Controller;
 import cs.spaceship.GameFrame;
 import cs.spaceship.GamePanel;
+import java.awt.Color;
 
 import java.awt.Graphics;
 import java.awt.Image;
@@ -54,8 +55,9 @@ public class Spaceship extends Entity {
         if (isPressed(Controller.Key.FIRE)) {
             Bullet b = new Bullet();
             b.setPosition(position.x, position.y - 20);
-            b.setVelocity(0, -1);
-            b.setRadius(5);
+            b.setVelocity(0, -15);
+            b.setRadius(6);
+            b.setColor(Color.RED.darker().brighter());
             ((GamePanel)GameFrame.get().getCurrentPanel()).bullets.add(b);
         }
         position.add(dx, dy);

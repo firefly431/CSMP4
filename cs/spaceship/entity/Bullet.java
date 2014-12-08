@@ -59,7 +59,7 @@ public class Bullet extends Entity {
         g.setColor(color);
         g.fillOval((int)posx - radius, (int)posy - radius, radius * 2, radius * 2);
         g.setColor(Color.WHITE);
-        g.fillOval((int)posx - radius * 4 / 5, (int)posy - radius * 4 / 5, radius * 4 / 5 * 2, radius * 4 / 5 * 2);
+        g.fillOval((int)posx - radius * 2 / 3, (int)posy - radius * 2 / 3, radius * 2 / 3 * 2, radius * 2 / 3 * 2);
     }
 
     @Override
