@@ -22,7 +22,7 @@ public class Bullet extends DeletableEntity {
     public double posx, posy;
     public Color color;
     // if target is set, on update will check for collision and destroy it
-    private EntityGroup<? extends DeletableEntity> target;
+    private EntityGroup<? extends Targetable> target;
 
     public Bullet() {
         target = null;
@@ -51,7 +51,7 @@ public class Bullet extends DeletableEntity {
         return target;
     }
 
-    public void setTarget(EntityGroup<? extends DeletableEntity> target) {
+    public void setTarget(EntityGroup<? extends Targetable> target) {
         this.target = target;
     }
 
@@ -65,9 +65,9 @@ public class Bullet extends DeletableEntity {
         posy += vely;
         position.set((int)posx, (int)posy);
         if (target != null) {
-            DeletableEntity hit = target.getCollidingEntity(getAABB());
+            Targetable hit = target.getCollidingEntity(getAABB());
             if (hit != null) {
-                hit.markForDeletion();
+                hit.hitByBullet();
                 markForDeletion();
             }
         }
@@ -111,7 +111,7 @@ public class Bullet extends DeletableEntity {
         fire(x, y, radius, velx, vely, color, null);
     }
 
-    public static void fire(double x, double y, int radius, double velx, double vely, Color color, EntityGroup<? extends DeletableEntity> target) {
+    public static void fire(double x, double y, int radius, double velx, double vely, Color color, EntityGroup<? extends Targetable> target) {
         Bullet b = new Bullet();
         b.setPosition(x, y);
         b.setRadius(radius);

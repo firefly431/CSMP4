@@ -9,7 +9,7 @@ package cs.spaceship.entity;
  *
  * @author s506571
  */
-public class DeletableEntity extends Entity {
+public class DeletableEntity extends Entity implements Targetable {
     protected boolean delete;
 
     public void markForDeletion() {
@@ -24,5 +24,10 @@ public class DeletableEntity extends Entity {
     // avoid if possible, will do nothing if already deleted
     public void unmarkForDeletion() {
         delete = false;
+    }
+
+    @Override
+    public void hitByBullet() {
+        markForDeletion();
     }
 }
