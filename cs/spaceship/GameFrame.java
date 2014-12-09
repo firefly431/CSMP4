@@ -1,7 +1,6 @@
 package cs.spaceship;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.*;
 import cs.spaceship.resources.Music;
 
@@ -10,7 +9,7 @@ import cs.spaceship.resources.Music;
  */
 public class GameFrame extends JFrame {
     public static final int WINDOW_WIDTH = 640;
-    public static final int WINDOW_HEIGHT = 480;
+    public static final int WINDOW_HEIGHT = 960;
     private StatePanel currentPanel;
 
     // allow other classes to access the main frame

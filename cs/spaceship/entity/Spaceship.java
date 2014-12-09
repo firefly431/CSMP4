@@ -26,6 +26,15 @@ public class Spaceship extends Entity {
 
     public static final int HORIZONTAL_SPEED = 6;
     public static final int VERTICAL_SPEED = 4;
+
+    public static final int BULLET_OFFSET_X = 38;
+    public static final int BULLET_OFFSET_Y = -45;
+    public static final int BULLET_RADIUS = 6;
+    public static final int BULLET_SPEED = -15;
+    public static final int BULLET_FIRE_RATE = 4;
+
+    protected int bullet_timer;
+
     @Override
     public int COLLISION_WIDTH() {
         return 26;
@@ -38,6 +47,7 @@ public class Spaceship extends Entity {
     public Spaceship() {
         animator = ANIM.new Animator();
         position = new Vector2D();
+        bullet_timer = 0;
     }
 
     @Override
@@ -52,13 +62,21 @@ public class Spaceship extends Entity {
             dy -= VERTICAL_SPEED;
         if (isPressed(Controller.Key.DOWN))
             dy += VERTICAL_SPEED;
-        if (isPressed(Controller.Key.FIRE)) {
-            Bullet b = new Bullet();
-            b.setPosition(position.x, position.y - 20);
-            b.setVelocity(0, -15);
-            b.setRadius(6);
-            b.setColor(Color.RED.darker().brighter());
-            ((GamePanel)GameFrame.get().getCurrentPanel()).bullets.add(b);
+        if (isPressed(Controller.Key.FIRE) && bullet_timer == 0) {
+            Bullet.fire(position.x - BULLET_OFFSET_X,
+                        position.y + BULLET_OFFSET_Y,
+                        BULLET_RADIUS,
+                        0, BULLET_SPEED,
+                        Color.RED.darker().brighter(),
+                        ((GamePanel)GameFrame.get().getCurrentPanel()).enemies);
+            Bullet.fire(position.x + BULLET_OFFSET_X - 1,
+                        position.y + BULLET_OFFSET_Y,
+                        BULLET_RADIUS,
+                        0, BULLET_SPEED,
+                        Color.RED.darker().brighter(),
+                        ((GamePanel)GameFrame.get().getCurrentPanel()).enemies);
+            // wait BULLET_FIRE_RATE frames until next bullet
+            bullet_timer = BULLET_FIRE_RATE;
         }
         position.add(dx, dy);
         AABB aabb = getAABB();
@@ -75,6 +93,9 @@ public class Spaceship extends Entity {
             tl.y = GameFrame.WINDOW_HEIGHT - COLLISION_HEIGHT();
         aabb.moveTo(tl);
         position.set(aabb.getCenter());
+        // advance bullet timer
+        if (bullet_timer > 0)
+            bullet_timer--;
         // animate
         animator.animate();
     }
