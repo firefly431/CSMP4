@@ -33,7 +33,7 @@ public class Spaceship extends Entity {
     public static final int BULLET_SPEED = -15;
     public static final int BULLET_FIRE_RATE = 4;
 
-    protected int bullet_timer;
+    protected Cannon leftCannon, rightCannon;
 
     @Override
     public int COLLISION_WIDTH() {
@@ -44,10 +44,25 @@ public class Spaceship extends Entity {
         return 86;
     }
 
-    public Spaceship() {
+    public Spaceship(EntityGroup<Enemy> target) {
         animator = ANIM.new Animator();
         position = new Vector2D();
-        bullet_timer = 0;
+        leftCannon = new Cannon(new Bullet(
+            position.x - BULLET_OFFSET_X,
+            position.y + BULLET_OFFSET_Y,
+            BULLET_RADIUS,
+            0, BULLET_SPEED,
+            Color.RED.darker().brighter(),
+            target
+        ), BULLET_FIRE_RATE);
+        rightCannon = new Cannon(new Bullet(
+            position.x + BULLET_OFFSET_X,
+            position.y + BULLET_OFFSET_Y,
+            BULLET_RADIUS,
+            0, BULLET_SPEED,
+            Color.RED.darker().brighter(),
+            target
+        ), BULLET_FIRE_RATE);
     }
 
     @Override
@@ -62,21 +77,9 @@ public class Spaceship extends Entity {
             dy -= VERTICAL_SPEED;
         if (isPressed(Controller.Key.DOWN))
             dy += VERTICAL_SPEED;
-        if (isPressed(Controller.Key.FIRE) && bullet_timer == 0) {
-            Bullet.fire(position.x - BULLET_OFFSET_X,
-                        position.y + BULLET_OFFSET_Y,
-                        BULLET_RADIUS,
-                        0, BULLET_SPEED,
-                        Color.RED.darker().brighter(),
-                        ((GamePanel)GameFrame.get().getCurrentPanel()).enemies);
-            Bullet.fire(position.x + BULLET_OFFSET_X - 1,
-                        position.y + BULLET_OFFSET_Y,
-                        BULLET_RADIUS,
-                        0, BULLET_SPEED,
-                        Color.RED.darker().brighter(),
-                        ((GamePanel)GameFrame.get().getCurrentPanel()).enemies);
-            // wait BULLET_FIRE_RATE frames until next bullet
-            bullet_timer = BULLET_FIRE_RATE;
+        if (isPressed(Controller.Key.FIRE)) {
+            leftCannon.fire();
+            rightCannon.fire();
         }
         position.add(dx, dy);
         AABB aabb = getAABB();
@@ -93,9 +96,11 @@ public class Spaceship extends Entity {
             tl.y = GameFrame.WINDOW_HEIGHT - COLLISION_HEIGHT();
         aabb.moveTo(tl);
         position.set(aabb.getCenter());
+        leftCannon.setBasePosition(position);
+        rightCannon.setBasePosition(position);
         // advance bullet timer
-        if (bullet_timer > 0)
-            bullet_timer--;
+        leftCannon.update();
+        rightCannon.update();
         // animate
         animator.animate();
     }

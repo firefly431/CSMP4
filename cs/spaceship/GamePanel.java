@@ -26,9 +26,6 @@ public class GamePanel extends ControllableStatePanel implements ActionListener 
     Timer stepTimer;
 
     public GamePanel() {
-        // player
-        player = new Spaceship();
-        player.setController(getController());
         // bullets
         bullets = new EntityGroup<Bullet>();
         // enemies
@@ -36,6 +33,9 @@ public class GamePanel extends ControllableStatePanel implements ActionListener 
         Enemy initialEnemy = new Enemy();
         initialEnemy.setPosition(new Vector2D(GameFrame.WINDOW_WIDTH / 2, GameFrame.WINDOW_HEIGHT / 2));
         enemies.add(initialEnemy);
+        // player
+        player = new Spaceship(enemies);
+        player.setController(getController());
         // center player on screen
         player.setPosition(new Vector2D(GameFrame.WINDOW_WIDTH / 2, GameFrame.WINDOW_HEIGHT - 100));
         stepTimer = new Timer(30, this);

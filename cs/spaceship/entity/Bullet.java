@@ -28,6 +28,27 @@ public class Bullet extends DeletableEntity {
         target = null;
     }
 
+    // copy constructor
+    public Bullet(Bullet other) {
+        radius = other.radius;
+        velx = other.velx;
+        vely = other.vely;
+        posx = other.posx;
+        posy = other.posy;
+        color = other.color;
+        target = other.target;
+    }
+
+    public Bullet(double x, double y, int radius, double velx, double vely, Color color, EntityGroup<? extends Targetable> target) {
+        this.radius = radius;
+        this.velx = velx;
+        this.vely = vely;
+        this.posx = x;
+        this.posy = y;
+        this.color = color;
+        this.target = target;
+    }
+
     public int getRadius() {
         return radius;
     }
@@ -118,6 +139,14 @@ public class Bullet extends DeletableEntity {
         b.setVelocity(velx, vely);
         b.setColor(color);
         b.setTarget(target);
-        ((GamePanel)GameFrame.get().getCurrentPanel()).bullets.add(b);
+        b.fire();
+    }
+
+    public void fire() {
+        ((GamePanel)GameFrame.get().getCurrentPanel()).bullets.add(this);
+    }
+
+    public String toString() {
+        return String.format("(%f, %f) %d (%f, %f), %s, %s", posx, posy, radius, velx, vely, color, target);
     }
 }
