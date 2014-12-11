@@ -17,12 +17,12 @@ import java.awt.Graphics;
  * @author s544545
  */
 public class Bullet extends DeletableEntity {
-    public int radius;
-    public double velx, vely;
-    public double posx, posy;
-    public Color color;
+    protected int radius;
+    protected double velx, vely;
+    protected double posx, posy;
+    protected Color color;
     // if target is set, on update will check for collision and destroy it
-    private EntityGroup<? extends Targetable> target;
+    protected EntityGroup<? extends Targetable> target;
 
     public Bullet() {
         target = null;
