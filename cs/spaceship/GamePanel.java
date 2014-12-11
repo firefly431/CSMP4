@@ -24,6 +24,7 @@ public class GamePanel extends ControllableStatePanel implements ActionListener 
     public EntityGroup<Bullet> bullets;
     public EntityGroup<Enemy> enemies;
     Timer stepTimer;
+    public static final int FPS = 60;
 
     public GamePanel() {
         // bullets
@@ -38,7 +39,7 @@ public class GamePanel extends ControllableStatePanel implements ActionListener 
         player.setController(getController());
         // center player on screen
         player.setPosition(new Vector2D(GameFrame.WINDOW_WIDTH / 2, GameFrame.WINDOW_HEIGHT - 100));
-        stepTimer = new Timer(30, this);
+        stepTimer = new Timer(1000 / FPS, this);
         stepTimer.start();
     }
     
