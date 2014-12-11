@@ -21,7 +21,7 @@ import java.awt.Image;
  * @author s506571
  */
 public class Spaceship extends Entity {
-    public static final Animation ANIM = new Animation("xwing%d.png", 2, 3);
+    public static final Animation ANIM = new Animation("xwing%d.png", 2, GamePanel.FPS / (1000 / 100));
     private Animation.Animator animator;
 
     public static final int HORIZONTAL_SPEED = 6;
