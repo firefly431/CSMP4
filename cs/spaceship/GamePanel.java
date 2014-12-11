@@ -9,7 +9,9 @@ package cs.spaceship;
 
 import cs.geom.Vector2D;
 import cs.spaceship.entity.Bullet;
+import cs.spaceship.entity.DefaultEnemyFactory;
 import cs.spaceship.entity.Enemy;
+import cs.spaceship.entity.EnemyTimer;
 import cs.spaceship.entity.EntityGroup;
 import cs.spaceship.entity.Spaceship;
 import java.awt.*;
@@ -24,6 +26,7 @@ public class GamePanel extends ControllableStatePanel implements ActionListener 
     public EntityGroup<Bullet> bullets;
     public EntityGroup<Enemy> enemies;
     Timer stepTimer;
+    EnemyTimer<Enemy> enemyTimer;
     public static final int FPS = 60;
 
     public GamePanel() {
@@ -31,9 +34,7 @@ public class GamePanel extends ControllableStatePanel implements ActionListener 
         bullets = new EntityGroup<Bullet>();
         // enemies
         enemies = new EntityGroup<Enemy>();
-        Enemy initialEnemy = new Enemy();
-        initialEnemy.setPosition(new Vector2D(GameFrame.WINDOW_WIDTH / 2, GameFrame.WINDOW_HEIGHT / 2));
-        enemies.add(initialEnemy);
+        enemyTimer = new EnemyTimer<Enemy>(60, enemies, new DefaultEnemyFactory());
         // player
         player = new Spaceship(enemies);
         player.setController(getController());
@@ -46,6 +47,7 @@ public class GamePanel extends ControllableStatePanel implements ActionListener 
     // timer event
     public void actionPerformed(ActionEvent e) {
         enemies.update();
+        enemyTimer.update();
         bullets.update();
         player.update();
         // repaint, done updating

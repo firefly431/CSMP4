@@ -16,4 +16,9 @@ public class Enemy extends DeletableEntity {
     public int COLLISION_HEIGHT() {
         return 30;
     }
+
+    @Override
+    public void update() {
+        position.y++;
+    }
 }
