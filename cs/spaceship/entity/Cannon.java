@@ -6,12 +6,13 @@
 package cs.spaceship.entity;
 
 import cs.geom.Vector2D;
+import cs.spaceship.Updatable;
 
 /**
  *
  * @author s506571
  */
-public class Cannon {
+public class Cannon implements Updatable {
     protected Bullet factory;
     protected int rate;
     protected int timer;

@@ -1,3 +1,2 @@
-TODO: enemies
-TODO: Cannon class, fires bullets at regular intervals
+TODO: enemy factory
 TODO: explosions

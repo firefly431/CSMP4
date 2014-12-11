@@ -6,11 +6,11 @@
 package cs.spaceship.entity;
 
 import cs.geom.*;
-import cs.spaceship.Controller;
+import cs.spaceship.*;
 import java.awt.Color;
 import java.awt.Graphics;
 
-public abstract class Entity {
+public abstract class Entity implements Updatable {
     public int COLLISION_WIDTH() {
         return 0;
     }
