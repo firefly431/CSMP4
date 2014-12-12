@@ -34,7 +34,7 @@ public class GamePanel extends ControllableStatePanel implements ActionListener 
         bullets = new EntityGroup<Bullet>();
         // enemies
         enemies = new EntityGroup<Enemy>();
-        enemyTimer = new EnemyTimer<Enemy>(5, enemies, new DefaultEnemyFactory());
+        enemyTimer = new EnemyTimer<Enemy>(60, enemies, new DefaultEnemyFactory());
         // player
         player = new Spaceship(enemies);
         player.setController(getController());
