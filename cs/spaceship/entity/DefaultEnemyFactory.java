@@ -12,7 +12,7 @@ import cs.spaceship.GameFrame;
  *
  * @author s544545
  */
-public class DefaultEnemyFactory implements EnemyFactory<Enemy> {
+public class DefaultEnemyFactory extends EnemyFactory<Enemy> {
     @Override
     public Enemy build() {
         Enemy e = new Enemy();
