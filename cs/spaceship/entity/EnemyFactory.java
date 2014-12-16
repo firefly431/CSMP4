@@ -9,9 +9,9 @@ package cs.spaceship.entity;
  *
  * @author s544545
  */
-public abstract class EnemyFactory<E extends Enemy> {
-    public abstract E build();
-    public E[] buildArray() {
-        return (E[])new Object[] {build()};
+public abstract class EnemyFactory {
+    public abstract Enemy build();
+    public Enemy[] buildArray() {
+        return new Enemy[] {build()};
     }
 }

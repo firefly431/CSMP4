@@ -8,6 +8,7 @@
 package cs.spaceship;
 
 import cs.geom.Vector2D;
+import cs.spaceship.entity.ArrowEnemyFactory;
 import cs.spaceship.entity.Bullet;
 import cs.spaceship.entity.DefaultEnemyFactory;
 import cs.spaceship.entity.Enemy;
@@ -34,7 +35,9 @@ public class GamePanel extends ControllableStatePanel implements ActionListener 
         bullets = new EntityGroup<Bullet>();
         // enemies
         enemies = new EntityGroup<Enemy>();
-        enemyTimer = new EnemyTimer<Enemy>(60, 1, enemies, new DefaultEnemyFactory());
+        enemyTimer = new EnemyTimer<Enemy>(240, 1, enemies,
+                new ArrowEnemyFactory(new DefaultEnemyFactory()
+                , 5, -20, 400));
         // player
         player = new Spaceship(enemies);
         player.setController(getController());
