@@ -3,20 +3,22 @@
  * and open the template in the editor.
  */
 
-package cs.spaceship.entity;
+package cs.spaceship.entity.enemy;
+
+import cs.spaceship.entity.EntityGroup;
 
 /**
  *
  * @author s544545
  */
-public class EnemyTimer<E extends Enemy> {
+public class EnemyTimer {
     protected int rate;
     protected int timer;
     protected int count;
-    protected EntityGroup<? super E> group;
-    protected EnemyFactory<? super E> factory;
+    protected EntityGroup<? super Enemy> group;
+    protected EnemyFactory factory;
 
-    public EnemyTimer(int rate, int count, EntityGroup<? super E> group, EnemyFactory<? super E> factory) {
+    public EnemyTimer(int rate, int count, EntityGroup<? super Enemy> group, EnemyFactory factory) {
         this.rate = rate;
         this.count = count;
         this.timer = 0;
@@ -29,9 +31,9 @@ public class EnemyTimer<E extends Enemy> {
             timer = rate;
             for (int i = 0; i < count; i++) {
                 //make new enemy
-                for (Object new_enemy : factory.buildArray()) {
+                for (Enemy new_enemy : factory.buildArray()) {
                     if (group != null && new_enemy != null)
-                        group.add((E)new_enemy);
+                        group.add(new_enemy);
                 }
             }
         } else {

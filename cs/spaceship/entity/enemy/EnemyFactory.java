@@ -3,7 +3,7 @@
  * and open the template in the editor.
  */
 
-package cs.spaceship.entity;
+package cs.spaceship.entity.enemy;
 
 /**
  *

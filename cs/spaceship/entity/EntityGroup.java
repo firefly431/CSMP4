@@ -80,6 +80,11 @@ public class EntityGroup<E extends Entity> extends Entity {
         entities.add(e);
     }
 
+    public void add(E[] e) {
+        for (E x : e)
+            entities.add(x);
+    }
+
     public void remove(E e) {
         entities.remove(e);
     }

@@ -5,6 +5,7 @@
 
 package cs.spaceship.entity;
 
+import cs.spaceship.entity.enemy.Enemy;
 import cs.geom.AABB;
 import cs.geom.Vector2D;
 import cs.spaceship.Animation;
@@ -20,18 +21,18 @@ import java.awt.Image;
  *
  * @author s506571
  */
-public class Spaceship extends Entity {
+public class Spaceship extends Entity implements Targetable {
     public static final Animation ANIM = new Animation("xwing%d.png", 2, GamePanel.FPS / (1000 / 100));
     private Animation.Animator animator;
 
-    public static final int HORIZONTAL_SPEED = 6;
-    public static final int VERTICAL_SPEED = 4;
+    public static final int HORIZONTAL_SPEED = 12;
+    public static final int VERTICAL_SPEED = 8;
 
     public static final int BULLET_OFFSET_X = 38;
     public static final int BULLET_OFFSET_Y = -45;
     public static final int BULLET_RADIUS = 6;
     public static final int BULLET_SPEED = -15;
-    public static final int BULLET_FIRE_RATE = 4;
+    public static final int BULLET_FIRE_RATE = 12;
 
     protected Cannon leftCannon, rightCannon;
 
@@ -109,5 +110,10 @@ public class Spaceship extends Entity {
     public void draw(Graphics g) {
         Image img = animator.get();
         g.drawImage(img, position.x - img.getWidth(null) / 2, position.y - img.getWidth(null) / 2, null);
+    }
+
+    @Override
+    public void hitByBullet() {
+        System.out.println("Player was hit!");
     }
 }

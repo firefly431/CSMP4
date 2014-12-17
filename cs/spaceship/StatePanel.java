@@ -25,6 +25,8 @@ public class StatePanel extends JPanel implements KeyListener, MouseListener {
         addMouseListener(this);
     }
 
+    public void init() {}
+
     /**
      * @inherit
      */

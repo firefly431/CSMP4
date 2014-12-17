@@ -3,7 +3,7 @@
  * and open the template in the editor.
  */
 
-package cs.spaceship.entity;
+package cs.spaceship.entity.enemy;
 
 import cs.geom.Vector2D;
 import cs.spaceship.GameFrame;

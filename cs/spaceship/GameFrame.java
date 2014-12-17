@@ -80,6 +80,7 @@ public class GameFrame extends JFrame {
         getContentPane().add(currentPanel);
         addKeyListener(currentPanel);
         currentPanel.revalidate();
+        currentPanel.init();
         repaint();
     }
 }
