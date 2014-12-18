@@ -45,4 +45,8 @@ public class Enemy extends DamageableEntity {
     public void dequip() {
         cannon = null;
     }
+
+    public Cannon getCannon() {
+        return cannon;
+    }
 }

@@ -11,13 +11,13 @@ package cs.spaceship.entity.enemy;
  */
 public class WavyEnemy extends Enemy {
     protected int period; // in pixels
-    protected int velocity;
+    public int velocity;
     protected int amplitude;
     protected int x;
     @Override
     public void update() {
         position.y += velocity;
-        position.x = (int)(x + Math.sin(position.y / period * Math.PI * 2) * amplitude);
+        position.x = (int)(x + Math.sin((double)position.y / period * Math.PI * 2) * amplitude);
         super.update();
     }
 

@@ -12,6 +12,7 @@ package cs.spaceship.entity;
 public class SpiralCannon extends Cannon {
     protected double angle;
     protected int period;
+    public int vely;
 
     public SpiralCannon(Bullet base, int rate, double theta, int period) {
         super(base, rate);
@@ -25,7 +26,7 @@ public class SpiralCannon extends Cannon {
         b.posx += basePosition.x;
         b.posy += basePosition.y;
         b.velx =  Math.cos(angle) * factory.vely;
-        b.vely = -Math.sin(angle) * factory.vely;
+        b.vely = -Math.sin(angle) * factory.vely + vely;
         b.fire();
         angle += (Math.PI * 2) / period;
     }

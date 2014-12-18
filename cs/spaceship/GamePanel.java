@@ -81,7 +81,8 @@ public class GamePanel extends ControllableStatePanel implements ActionListener 
         enemies.add(zig1);
         enemies.add(zig2);
         WavyEnemy wave = new WavyEnemy(100, 4, GameFrame.WINDOW_WIDTH / 3, GameFrame.WINDOW_WIDTH / 2);
-        wave.equip(new SpiralCannon(new Bullet(0, 0, 10, 0, 6, Color.PINK, playerG), 20, Math.PI / 2, 12));
+        wave.equip(new SpiralCannon(new Bullet(0, 0, 10, 0, 6, Color.PINK, playerG), 20, Math.PI / 2, 16));
+        ((SpiralCannon)wave.getCannon()).vely = wave.velocity;
         enemies.add(wave);
     }
     
