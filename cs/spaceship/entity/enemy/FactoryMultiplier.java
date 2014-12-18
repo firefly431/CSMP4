@@ -30,7 +30,7 @@ public class FactoryMultiplier extends EnemyFactory {
     public Enemy[] buildArray() {
         Enemy[] ret = new Enemy[num];
         for (int i = 0; i < num; i++) {
-            ret[i] = factory.build();
+            ret[i] = factory.build(i, num);
             ret[i].setPosition(new Vector2D(
                     GameFrame.WINDOW_WIDTH / num / 2
                     + i * GameFrame.WINDOW_WIDTH / num,

@@ -6,6 +6,7 @@
 package cs.spaceship.entity.enemy;
 
 import cs.spaceship.GameFrame;
+import cs.spaceship.entity.Cannon;
 import cs.spaceship.entity.DamageableEntity;
 
 /**
@@ -13,6 +14,8 @@ import cs.spaceship.entity.DamageableEntity;
  * @author s506571
  */
 public class Enemy extends DamageableEntity {
+    protected Cannon cannon;
+
     public int COLLISION_WIDTH() {
         return 40;
     }
@@ -22,12 +25,24 @@ public class Enemy extends DamageableEntity {
 
     @Override
     public void update() {
-        position.y++;
+        if (cannon != null) {
+            cannon.setBasePosition(position);
+            cannon.fire();
+            cannon.update();
+        }
     }
 
     @Override
     public boolean shouldDelete() {
         return super.shouldDelete() ||
                 (position.y > (COLLISION_HEIGHT() + GameFrame.WINDOW_HEIGHT));
+    }
+
+    public void equip(Cannon c) {
+        cannon = c;
+    }
+
+    public void dequip() {
+        cannon = null;
     }
 }

@@ -11,6 +11,7 @@ package cs.spaceship.entity.enemy;
  */
 public abstract class EnemyFactory {
     public abstract Enemy build();
+    public Enemy build(int param1, int param2) {return build();}
     public Enemy[] buildArray() {
         return new Enemy[] {build()};
     }

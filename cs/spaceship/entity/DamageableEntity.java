@@ -14,6 +14,14 @@ public class DamageableEntity extends DeletableEntity {
     public DamageableEntity() {
         health = 1;
     }
+
+    public int getHealth() {
+        return health;
+    }
+
+    public void setHealth(int health) {
+        this.health = health;
+    }
     @Override
     public void hitByBullet() {
         if (health == 1)

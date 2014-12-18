@@ -15,7 +15,7 @@ import cs.spaceship.GameFrame;
 public class DefaultEnemyFactory extends EnemyFactory {
     @Override
     public Enemy build() {
-        Enemy e = new Enemy();
+        Enemy e = new LineEnemy(1);
         e.setPosition(new Vector2D((int)(GameFrame.WINDOW_WIDTH * Math.random()), 0));
         return e;
     }

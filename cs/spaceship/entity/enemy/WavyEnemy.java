@@ -5,16 +5,26 @@
 
 package cs.spaceship.entity.enemy;
 
-import cs.spaceship.GameFrame;
-
 /**
  *
  * @author s506571
  */
 public class WavyEnemy extends Enemy {
+    protected int period; // in pixels
+    protected int velocity;
+    protected int amplitude;
+    protected int x;
     @Override
     public void update() {
-        position.y += 5;
-        position.x = (int)(GameFrame.WINDOW_WIDTH / 2 + Math.sin(position.y / 100.0) * GameFrame.WINDOW_WIDTH / 3);
+        position.y += velocity;
+        position.x = (int)(x + Math.sin(position.y / period * Math.PI * 2) * amplitude);
+        super.update();
+    }
+
+    public WavyEnemy(int period, int velocity, int amplitude, int x) {
+        this.period = period;
+        this.velocity = velocity;
+        this.amplitude = amplitude;
+        this.x = x;
     }
 }

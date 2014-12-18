@@ -6,34 +6,33 @@
 package cs.spaceship.entity.enemy;
 
 import cs.spaceship.GameFrame;
-import cs.spaceship.GamePanel;
-import cs.spaceship.entity.Bullet;
-import cs.spaceship.entity.Cannon;
-import java.awt.Color;
 
 /**
- *
  * @author s506571
  */
 public class SideToSideEnemy extends Enemy {
-    public int direction = 12;
-    Cannon cannon = new Cannon(new Bullet(0, 0,
-            8, 0, 6,
-            Color.BLUE,
-            ((GamePanel)GameFrame.get().getCurrentPanel()).playerG), 40);
-    public SideToSideEnemy() {
-        health = 5;
+    protected int direction;
+    protected int velx;
+    public SideToSideEnemy(int velx, int direction) {
+        health = 5; // default
+        this.velx = velx;
+        this.direction = direction;
+    }
+    public SideToSideEnemy(int velx) {
+        this(velx, 1);
     }
     @Override
     public void update() {
-        cannon.setBasePosition(position);
-        position.x += direction;
+        position.x += direction * velx;
         int left = getAABB().getTopLeft().x;
         int right = getAABB().getBottomRight().x;
         if (left < 0 || right >= GameFrame.WINDOW_WIDTH) {
             direction *= -1;
+            if (left < 0)
+                position.x -= left * 2;
+            else
+                position.x -= (right - GameFrame.WINDOW_WIDTH) * 2;
         }
-        cannon.fire();
-        cannon.update();
+        super.update();
     }
 }

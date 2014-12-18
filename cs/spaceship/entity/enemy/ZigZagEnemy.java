@@ -5,27 +5,23 @@
 
 package cs.spaceship.entity.enemy;
 
-import cs.spaceship.GameFrame;
-import cs.spaceship.GamePanel;
-import cs.spaceship.entity.Bullet;
-import cs.spaceship.entity.CircleCannon;
-import java.awt.Color;
-
 /**
  *
  * @author s506571
  */
 public class ZigZagEnemy extends SideToSideEnemy {
-    public ZigZagEnemy() {
-        super();
-        direction = 20;
-        cannon = new CircleCannon(new Bullet(
-            0, 0, 12, 0, 4, Color.yellow, ((GamePanel)GameFrame.get().getCurrentPanel()).playerG), 90, 12);
+    protected int vely;
+    public ZigZagEnemy(int velx, int direction, int vely) {
+        super(velx, direction);
+        this.vely = vely;
         health = 2;
+    }
+    public ZigZagEnemy(int velx, int vely) {
+        this(velx, 1, vely);
     }
     @Override
     public void update() {
+        position.y += vely;
         super.update();
-        position.y += 1;
     }
 }
