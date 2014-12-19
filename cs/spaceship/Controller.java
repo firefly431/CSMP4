@@ -18,7 +18,7 @@ public class Controller implements KeyListener {
         // modify this class to modify keys to listen to
         LEFT(KeyEvent.VK_LEFT), RIGHT(KeyEvent.VK_RIGHT),
         UP(KeyEvent.VK_UP), DOWN(KeyEvent.VK_DOWN),
-        FIRE(KeyEvent.VK_SPACE);
+        FIRE(KeyEvent.VK_SPACE), RESTART(KeyEvent.VK_R);
 
         private int code;
 

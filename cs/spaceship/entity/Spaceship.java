@@ -115,5 +115,6 @@ public class Spaceship extends Entity implements Targetable {
     @Override
     public void hitByBullet() {
         System.out.println("Player was hit!");
+        ((GamePanel)GameFrame.get().getCurrentPanel()).freeze();
     }
 }

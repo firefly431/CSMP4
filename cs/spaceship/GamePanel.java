@@ -18,8 +18,8 @@ import cs.spaceship.entity.SpiralCannon;
 import cs.spaceship.entity.enemy.DefaultEnemyFactory;
 import cs.spaceship.entity.enemy.EnemyFactory;
 import cs.spaceship.entity.enemy.FactoryMultiplier;
+import cs.spaceship.entity.enemy.LineEnemy;
 import cs.spaceship.entity.enemy.SideToSideEnemy;
-import cs.spaceship.entity.enemy.WavyEnemy;
 import cs.spaceship.entity.enemy.ZigZagEnemy;
 import java.awt.*;
 import java.awt.event.*;
@@ -52,6 +52,7 @@ public class GamePanel extends ControllableStatePanel implements ActionListener 
         playerG.add(player);
         player.setPosition(new Vector2D(GameFrame.WINDOW_WIDTH / 2, GameFrame.WINDOW_HEIGHT - 100));
         stepTimer = new Timer(1000 / FPS, this);
+        stepTimer.setCoalesce(false);
         stepTimer.start();
         // make enemies
         enemies.add(
@@ -80,10 +81,11 @@ public class GamePanel extends ControllableStatePanel implements ActionListener 
         zig2.equip(new CircleCannon(new Bullet(0, 0, 12, 0, 8, Color.MAGENTA, playerG), 70, 8));
         enemies.add(zig1);
         enemies.add(zig2);
-        WavyEnemy wave = new WavyEnemy(100, 4, GameFrame.WINDOW_WIDTH / 3, GameFrame.WINDOW_WIDTH / 2);
-        wave.equip(new SpiralCannon(new Bullet(0, 0, 10, 0, 6, Color.PINK, playerG), 20, Math.PI / 2, 16));
-        ((SpiralCannon)wave.getCannon()).vely = wave.velocity;
-        enemies.add(wave);
+        LineEnemy spiral = new LineEnemy(2);
+        spiral.setPosition(new Vector2D(GameFrame.WINDOW_WIDTH / 2, 0));
+        spiral.equip(new SpiralCannon(new Bullet(0, 0, 10, 0, 6, Color.PINK, playerG), 20, Math.PI / 2, 16));
+        ((SpiralCannon)spiral.getCannon()).vely = spiral.getVelocity();
+        enemies.add(spiral);
     }
     
     // timer event
@@ -107,5 +109,16 @@ public class GamePanel extends ControllableStatePanel implements ActionListener 
         player.draw(g);
         enemies.draw(g);
         bullets.draw(g);
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+        super.keyPressed(e);
+        if (getController().isPressed(Controller.Key.RESTART))
+            GameFrame.get().transition(new GamePanel());
+    }
+
+    public void freeze() {
+        stepTimer.stop();
     }
 }
