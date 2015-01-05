@@ -34,7 +34,12 @@ public class GamePanel extends ControllableStatePanel implements ActionListener 
     public EntityGroup<Enemy> enemies;
     public EntityGroup<Spaceship> playerG;
     Timer stepTimer;
-    public static final int FPS = 60;
+    // for some reason it's really slow if FPS is 60
+    public static final int FPS = 65;
+    public static final int FRAMES_PER_TIMER = 10;
+    private long fps_timer = 0;
+    private int timer_time = 0;
+    double real_fps = FPS;
 
     public GamePanel() {
         // bullets
@@ -51,6 +56,7 @@ public class GamePanel extends ControllableStatePanel implements ActionListener 
         player.setController(getController());
         playerG.add(player);
         player.setPosition(new Vector2D(GameFrame.WINDOW_WIDTH / 2, GameFrame.WINDOW_HEIGHT - 100));
+        fps_timer = System.nanoTime();
         stepTimer = new Timer(1000 / FPS, this);
         stepTimer.setCoalesce(false);
         stepTimer.start();
@@ -95,6 +101,12 @@ public class GamePanel extends ControllableStatePanel implements ActionListener 
         player.update();
         // repaint, done updating
         repaint();
+        if (++timer_time >= FRAMES_PER_TIMER) {
+            timer_time = 0;
+            long newtime = System.nanoTime();
+            real_fps = 1e9 * FRAMES_PER_TIMER / (newtime - fps_timer);
+            fps_timer = newtime;
+        }
     }
 
     @Override
@@ -109,6 +121,9 @@ public class GamePanel extends ControllableStatePanel implements ActionListener 
         player.draw(g);
         enemies.draw(g);
         bullets.draw(g);
+        // draw FPS
+        g.setColor(Color.WHITE);
+        g.drawString("FPS: " + real_fps, 5, 20);
     }
 
     @Override
