@@ -5,9 +5,12 @@
 
 package cs.spaceship.entity.enemy;
 
+import cs.spaceship.Animation;
 import cs.spaceship.GameFrame;
 import cs.spaceship.entity.Cannon;
 import cs.spaceship.entity.DamageableEntity;
+import java.awt.Graphics;
+import java.awt.Image;
 
 /**
  *
@@ -15,6 +18,7 @@ import cs.spaceship.entity.DamageableEntity;
  */
 public class Enemy extends DamageableEntity {
     protected Cannon cannon;
+    protected Animation.Animator animator;
 
     public int COLLISION_WIDTH() {
         return 40;
@@ -30,6 +34,8 @@ public class Enemy extends DamageableEntity {
             cannon.fire();
             cannon.update();
         }
+        if (animator != null)
+            animator.animate();
     }
 
     @Override
@@ -48,5 +54,12 @@ public class Enemy extends DamageableEntity {
 
     public Cannon getCannon() {
         return cannon;
+    }
+
+    @Override public void draw(Graphics g) {
+        if (animator != null) {
+            Image img = animator.get();
+            g.drawImage(img, position.x - img.getWidth(null) / 2, position.y - img.getHeight(null) / 2, null);
+        } else super.draw(g);
     }
 }

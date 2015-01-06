@@ -19,7 +19,7 @@ import cs.spaceship.entity.enemy.EnemyFactory;
 import cs.spaceship.entity.enemy.FactoryMultiplier;
 import cs.spaceship.entity.enemy.LineEnemy;
 import cs.spaceship.entity.enemy.SideToSideEnemy;
-import cs.spaceship.entity.enemy.WavyEnemy;
+import cs.spaceship.entity.enemy.ZigZagEnemy;
 import java.awt.Color;
 
 /**
@@ -48,13 +48,13 @@ public class Wave1 implements Wave {
         target.add(
                 new FactoryMultiplier(
                 new DefaultEnemyFactory(), 8).buildArray());
-        //ZigZagEnemy zig1 = new ZigZagEnemy(20, 1, 1), zig2 = new ZigZagEnemy(20, -1, 1);
-        WavyEnemy zig1 = new WavyEnemy(GameFrame.WINDOW_HEIGHT, 2,  GameFrame.WINDOW_WIDTH / 2, GameFrame.WINDOW_WIDTH / 2),
-                  zig2 = new WavyEnemy(GameFrame.WINDOW_HEIGHT, 2, -GameFrame.WINDOW_WIDTH / 2, GameFrame.WINDOW_WIDTH / 2);
+        ZigZagEnemy zig1 = new ZigZagEnemy(20, 1, 1), zig2 = new ZigZagEnemy(20, -1, 1);
+        //WavyEnemy zig1 = new WavyEnemy(GameFrame.WINDOW_HEIGHT, 2,  GameFrame.WINDOW_WIDTH / 2, GameFrame.WINDOW_WIDTH / 2),
+        //          zig2 = new WavyEnemy(GameFrame.WINDOW_HEIGHT, 2, -GameFrame.WINDOW_WIDTH / 2, GameFrame.WINDOW_WIDTH / 2);
         zig1.setPosition(new Vector2D(GameFrame.WINDOW_WIDTH / 2 + 80, 100));
         zig2.setPosition(new Vector2D(GameFrame.WINDOW_WIDTH / 2 - 80, 100));
-        zig1.equip(new CircleCannon(new Bullet(0, 0, 12, 0, 8, Color.MAGENTA, playerG), 70, 8));
-        zig2.equip(new CircleCannon(new Bullet(0, 0, 12, 0, 8, Color.MAGENTA, playerG), 70, 8));
+        zig1.equip(new CircleCannon(new Bullet(0, 0, 6, 0, 8, Color.MAGENTA, playerG), 70, 8));
+        zig2.equip(new CircleCannon(new Bullet(0, 0, 6, 0, 8, Color.MAGENTA, playerG), 70, 8));
         target.add(zig1);
         target.add(zig2);
         LineEnemy spiral = new LineEnemy(2);
