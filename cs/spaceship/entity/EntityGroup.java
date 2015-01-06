@@ -88,4 +88,12 @@ public class EntityGroup<E extends Entity> extends Entity {
     public void remove(E e) {
         entities.remove(e);
     }
+
+    public int size() {
+        return entities.size();
+    }
+
+    public void clear() {
+        entities.clear();
+    }
 }

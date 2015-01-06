@@ -9,18 +9,10 @@ package cs.spaceship;
 
 import cs.geom.Vector2D;
 import cs.spaceship.entity.Bullet;
-import cs.spaceship.entity.Cannon;
-import cs.spaceship.entity.CircleCannon;
 import cs.spaceship.entity.enemy.Enemy;
 import cs.spaceship.entity.EntityGroup;
 import cs.spaceship.entity.Spaceship;
-import cs.spaceship.entity.SpiralCannon;
-import cs.spaceship.entity.enemy.DefaultEnemyFactory;
-import cs.spaceship.entity.enemy.EnemyFactory;
-import cs.spaceship.entity.enemy.FactoryMultiplier;
-import cs.spaceship.entity.enemy.LineEnemy;
-import cs.spaceship.entity.enemy.SideToSideEnemy;
-import cs.spaceship.entity.enemy.ZigZagEnemy;
+import cs.spaceship.waves.*;
 import java.awt.*;
 import java.awt.event.*;
 
@@ -41,6 +33,12 @@ public class GamePanel extends ControllableStatePanel implements ActionListener 
     private int timer_time = 0;
     double real_fps = FPS;
 
+    public static final Wave[] waves = {
+        new Wave1(),
+        new Wave1()
+    };
+    private int wave = 0;
+
     public GamePanel() {
         // bullets
         bullets = new EntityGroup<Bullet>();
@@ -60,38 +58,6 @@ public class GamePanel extends ControllableStatePanel implements ActionListener 
         stepTimer = new Timer(1000 / FPS, this);
         stepTimer.setCoalesce(false);
         stepTimer.start();
-        // make enemies
-        enemies.add(
-                new FactoryMultiplier(
-                new EnemyFactory() {
-                    @Override
-                    public Enemy build() {
-                        return build(0, 1);
-                    }
-                    @Override
-                    public Enemy build(int p1, int p2) {
-                        Enemy ret = new SideToSideEnemy(20, p1 < p2 / 2 ? -1 : 1);
-                        ret.setPosition(new Vector2D(GameFrame.WINDOW_WIDTH / 2, 20));
-                        ret.equip(new Cannon(new Bullet(0, 0, 4, 0, 4, Color.BLUE, playerG), 40));
-                        return ret;
-                    }
-                }, 4
-                ).buildArray());
-        enemies.add(
-                new FactoryMultiplier(
-                new DefaultEnemyFactory(), 8).buildArray());
-        ZigZagEnemy zig1 = new ZigZagEnemy(20, 1, 1), zig2 = new ZigZagEnemy(20, -1, 1);
-        zig1.setPosition(new Vector2D(GameFrame.WINDOW_WIDTH / 2 + 80, 100));
-        zig2.setPosition(new Vector2D(GameFrame.WINDOW_WIDTH / 2 - 80, 100));
-        zig1.equip(new CircleCannon(new Bullet(0, 0, 12, 0, 8, Color.MAGENTA, playerG), 70, 8));
-        zig2.equip(new CircleCannon(new Bullet(0, 0, 12, 0, 8, Color.MAGENTA, playerG), 70, 8));
-        enemies.add(zig1);
-        enemies.add(zig2);
-        LineEnemy spiral = new LineEnemy(2);
-        spiral.setPosition(new Vector2D(GameFrame.WINDOW_WIDTH / 2, 0));
-        spiral.equip(new SpiralCannon(new Bullet(0, 0, 10, 0, 6, Color.PINK, playerG), 20, Math.PI / 2, 16));
-        ((SpiralCannon)spiral.getCannon()).vely = spiral.getVelocity();
-        enemies.add(spiral);
     }
     
     // timer event
@@ -107,6 +73,8 @@ public class GamePanel extends ControllableStatePanel implements ActionListener 
             real_fps = 1e9 * FRAMES_PER_TIMER / (newtime - fps_timer);
             fps_timer = newtime;
         }
+        if (enemies.size() == 0 && bullets.size() == 0)
+            nextWave();
     }
 
     @Override
@@ -135,5 +103,16 @@ public class GamePanel extends ControllableStatePanel implements ActionListener 
 
     public void freeze() {
         stepTimer.stop();
+    }
+
+    protected void nextWave() {
+        if (wave < waves.length) {
+            player.setPosition(new Vector2D(GameFrame.WINDOW_WIDTH / 2, GameFrame.WINDOW_HEIGHT - 100));
+            enemies.clear();
+            bullets.clear();
+            waves[wave++].generateEnemies(enemies, playerG);
+        } else {
+            // YOU WIN!
+        }
     }
 }
