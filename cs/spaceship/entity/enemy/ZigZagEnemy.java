@@ -17,7 +17,7 @@ public class ZigZagEnemy extends SideToSideEnemy {
         return 20;
     }
     public int COLLISION_HEIGHT() {
-        return 30;
+        return 40;
     }
     public ZigZagEnemy(int velx, int direction, int vely) {
         super(velx, direction);
