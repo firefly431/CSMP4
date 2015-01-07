@@ -17,8 +17,8 @@ import cs.spaceship.entity.enemy.DefaultEnemyFactory;
 import cs.spaceship.entity.enemy.Enemy;
 import cs.spaceship.entity.enemy.EnemyFactory;
 import cs.spaceship.entity.enemy.FactoryMultiplier;
-import cs.spaceship.entity.enemy.LineEnemy;
 import cs.spaceship.entity.enemy.SideToSideEnemy;
+import cs.spaceship.entity.enemy.SpiralEnemy;
 import cs.spaceship.entity.enemy.ZigZagEnemy;
 import java.awt.Color;
 
@@ -57,10 +57,9 @@ public class Wave1 implements Wave {
         zig2.equip(new CircleCannon(new Bullet(0, 0, 6, 0, 8, Color.MAGENTA, playerG), 70, 8));
         target.add(zig1);
         target.add(zig2);
-        LineEnemy spiral = new LineEnemy(2);
+        SpiralEnemy spiral = new SpiralEnemy(2);
         spiral.setPosition(new Vector2D(GameFrame.WINDOW_WIDTH / 2, 0));
         spiral.equip(new SpiralCannon(new Bullet(0, 0, 10, 0, 6, Color.PINK, playerG), 20, Math.PI / 2, 16));
-        ((SpiralCannon)spiral.getCannon()).vely = spiral.getVelocity();
         target.add(spiral);
     }
 }

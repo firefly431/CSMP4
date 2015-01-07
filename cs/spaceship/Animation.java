@@ -32,6 +32,10 @@ public class Animation {
         }
     }
 
+    public static int fromFPS(double fps) {
+        return (int)(GamePanel.FPS / fps);
+    }
+
     public class Animator {
         int frame = 0;
         int timer = 0;

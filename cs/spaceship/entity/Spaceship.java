@@ -22,7 +22,7 @@ import java.awt.Image;
  * @author s506571
  */
 public class Spaceship extends Entity implements Targetable {
-    public static final Animation ANIM = new Animation("xwing%d.png", 2, GamePanel.FPS / (1000 / 100));
+    public static final Animation ANIM = new Animation("xwing%d.png", 2, Animation.fromFPS(10));
     private Animation.Animator animator;
 
     public static final int HORIZONTAL_SPEED = 12;
