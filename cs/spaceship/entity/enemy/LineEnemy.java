@@ -5,15 +5,19 @@
 
 package cs.spaceship.entity.enemy;
 
+import cs.spaceship.Animation;
+
 /**
  *
  * @author s506571
  */
 public class LineEnemy extends Enemy {
+    public static final Animation ANIM = new Animation("stapler%d.png", 2, Animation.fromFPS(10));
     protected int velocity = 1;
 
     public LineEnemy(int velocity) {
         setVelocity(velocity);
+        animator = ANIM.new Animator();
     }
 
     public int getVelocity() {
